@@ -39,3 +39,25 @@ function insertUsuario(PDO $con, $user, $pass, $name):bool{
         return false;
     }
 }
+
+function findAllMensajesUsuario($con, $id_user):array{
+    try{
+        $stm = $con->prepare("select m.id,
+                                     m.asunto,
+                                     u.full_name as remitente,
+                                     m.fecha_hora as fecha
+                              from usuario u join mensaje m on u.id=m.id_remitente
+                              where m.id_destinatario = :id_user");
+
+        $stm->bindValue(':id_user', $id_user);
+
+        //Ejecutamos
+        $stm->execute();
+
+        return $stm->fetchAll(); //Un array con el resultado si existe o vacio si no existe
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+        return [];
+    }
+}
