@@ -20,7 +20,6 @@
                 deleteMensaje($con, $id);
             }
         }
-        
     }
 
     $mensajes = findAllMensajesUsuario($con, $_SESSION['usuario']['id']);
