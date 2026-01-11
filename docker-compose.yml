@@ -28,7 +28,7 @@ services:
     ports:
       - "5452:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
       # Mapeamos el script de Postgres
       - ./bd/script_messenger_postgres.sql:/docker-entrypoint-initdb.d/init.sql
     # Red que va a usar
