@@ -13,11 +13,14 @@
     if($con === null) die('Error de conexión');
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $seleccionados = $_POST['seleccionados'];
+        if(isset($_POST['seleccionados'])){
+            $seleccionados = $_POST['seleccionados'];
 
-        foreach($seleccionados as $id){
-            deleteMensaje($con, $id);
+            foreach($seleccionados as $id){
+                deleteMensaje($con, $id);
+            }
         }
+        
     }
 
     $mensajes = findAllMensajesUsuario($con, $_SESSION['usuario']['id']);
@@ -63,5 +66,6 @@
     <input type="submit" value="Eliminar Seleccionados" name="borrar">
     </form>
     <a href="cerrarSesion.php">Cerrar Sesión</a>
+    <a href="nuevoMensaje.php">Nuevo Mensaje</a>
 </body>
 </html>
