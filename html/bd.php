@@ -61,3 +61,20 @@ function findAllMensajesUsuario($con, $id_user):array{
         return [];
     }
 }
+
+function deleteMensaje($con, $id):bool{
+    try{
+        $stm = $con->prepare("delete from mensaje where id = :id_mensaje");
+
+        $stm->bindValue('id_mensaje', $id);
+
+        //Ejecutamos
+        $stm->execute();
+
+        return $stm->rowCount() === 1;
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+        return false;
+    }
+}
